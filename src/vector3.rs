@@ -1,6 +1,6 @@
 extern crate rand;
 
-use std::ops::{Add, Sub, Mul, Div, Neg, Index};
+use std::ops::{Add, Sub, Mul, Div, Neg, Index, IndexMut};
 use self::rand::Rng;
 use vector4::Vector4;
 
@@ -210,6 +210,17 @@ impl Index<usize> for Vector3 {
             0 => &self.x,
             1 => &self.y,
             2 => &self.z,
+            _ => panic!("Invalid Vector3 Index"),
+        }
+    }
+}
+
+impl IndexMut<usize> for Vector3 {
+    fn index_mut(&mut self, index: usize) -> &mut f32 {
+         match index {
+            0 => &mut self.x,
+            1 => &mut self.y,
+            2 => &mut self.z,
             _ => panic!("Invalid Vector3 Index"),
         }
     }
