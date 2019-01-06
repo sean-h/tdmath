@@ -97,6 +97,10 @@ impl Vector3 {
         self.z
     }
 
+    pub fn has_nans(&self) -> bool {
+        self.x.is_nan() || self.y.is_nan() || self.z.is_nan()
+    }
+
     pub fn random_in_unit_sphere() -> Vector3 {
         let mut rng = rand::thread_rng();
         let mut p = Vector3::zero();
