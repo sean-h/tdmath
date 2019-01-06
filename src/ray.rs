@@ -20,11 +20,11 @@ impl Ray {
         self.origin
     }
 
-    pub fn direction(self) -> Vector3 {
+    pub fn direction(&self) -> Vector3 {
         self.direction
     }
     
-    pub fn time(self) -> f32 {
+    pub fn time(&self) -> f32 {
         self.time
     }
 
