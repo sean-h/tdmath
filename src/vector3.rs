@@ -257,4 +257,14 @@ mod tests {
         assert_eq!(0.0, z.y);
         assert_eq!(1.0, z.z);
     }
+
+    #[test]
+    fn test_vector_neg() {
+        let v0 = Vector3 {x: 1.0, y: 0.0, z: -6.0};
+        let v1 = -v0;
+
+        assert_eq!(-1.0, v1.x);
+        assert_eq!(0.0, v1.y);
+        assert_eq!(6.0, v1.z);
+    }
 }
