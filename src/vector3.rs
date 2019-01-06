@@ -115,6 +115,34 @@ impl Vector3 {
         p
     }
 
+    pub fn random_on_unit_sphere() -> Vector3 {
+        let mut rng = rand::thread_rng();
+        let mut p = Vector3::zero();
+        loop {
+            p = Vector3::new(rng.gen::<f32>(), rng.gen::<f32>(), rng.gen::<f32>()) * 2.0 - Vector3::new(1.0, 1.0, 1.0);
+
+            if p.length_squared() < 1.0 {
+                break;
+            }
+        }
+
+        p.normalized()
+    }
+
+    pub fn random_to_sphere(radius: f32, distance_squared: f32) -> Vector3 {
+        use std::f32;
+
+        let mut rng = rand::thread_rng();
+        let r1 = rng.gen::<f32>();
+        let r2 = rng.gen::<f32>();
+        let z = 1.0 + r2 * ((1.0 - radius * radius / distance_squared).sqrt() - 1.0);
+        let phi = 2.0 * f32::consts::PI * r1;
+        let x = phi.cos() * (1.0 - z * z).sqrt();
+        let y = phi.sin() * (1.0 - z * z).sqrt();
+
+        Vector3::new(x, y, z)
+    }
+
     pub fn random_in_unit_disk() -> Vector3 {
         let mut rng = rand::thread_rng();
         let mut p = Vector3::zero();
@@ -127,6 +155,20 @@ impl Vector3 {
         }
 
         p
+    }
+
+    pub fn random_cosine_direction() -> Vector3 {
+        use std::f32;
+
+        let mut rng = rand::thread_rng();
+        let r1 = rng.gen::<f32>();
+        let r2 = rng.gen::<f32>();
+        let z = (1.0 - r2).sqrt();
+        let phi = 2.0 * f32::consts::PI * r1;
+        let x = phi.cos() * 2.0 * r2.sqrt();
+        let y = phi.sin() * 2.0 * r2.sqrt();
+
+        Vector3::new(x, y, z)
     }
 
     pub fn reflect(v: Vector3, n: Vector3) -> Vector3 {
