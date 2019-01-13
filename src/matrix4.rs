@@ -80,12 +80,12 @@ impl Matrix4 {
                         [                 0.0,                  0.0,                  0.0,                              1.0]]}
     }
 
-    pub fn perpective(fov: f32, near: f32, far: f32) -> Matrix4 {
+    pub fn perpective(fov: f32, aspect: f32, near: f32, far: f32) -> Matrix4 {
         let mut m = Matrix4::zero();
-        let s = 1.0 / ((fov / 2.0 * 3.14159 / 180.0)).tan();
+        let s = (fov / 2.0 * 3.14159 / 180.0).tan();
 
-        m[0][0] = s;
-        m[1][1] = s;
+        m[0][0] = 1.0 / (s * aspect);
+        m[1][1] = 1.0 / s;
         m[2][2] = -far / (far - near);
         m[2][3] = -far * near / (far - near);
         m[3][2] = -1.0;
