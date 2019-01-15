@@ -10,6 +10,7 @@ pub struct Matrix4 {
 }
 
 impl Matrix4 {
+    /// Returns a matrix with all values set to 0.
     pub fn zero() -> Matrix4 {
         Matrix4 {data: [[0.0, 0.0, 0.0, 0.0],
                         [0.0, 0.0, 0.0, 0.0],
@@ -80,6 +81,7 @@ impl Matrix4 {
                         [                 0.0,                  0.0,                  0.0,                              1.0]]}
     }
 
+    /// Returns a perspective matrix for fov degrees and aspect ratio (width / height).
     pub fn perpective(fov: f32, aspect: f32, near: f32, far: f32) -> Matrix4 {
         let mut m = Matrix4::zero();
         let s = (fov / 2.0 * 3.14159 / 180.0).tan();

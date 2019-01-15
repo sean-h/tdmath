@@ -85,22 +85,27 @@ impl Vector3 {
         Some(Vector3::new(u, v, w))
     }
 
+    /// Returns the `x` value.
     pub fn r(&self) -> f32 {
         self.x
     }
 
+    /// Returns the `y` value.
     pub fn g(&self) -> f32 {
         self.y
     }
 
+    /// Returns the `z` value.
     pub fn b(&self) -> f32 {
         self.z
     }
 
+    /// Returns true if `x`, `y` or `z` is NaN.
     pub fn has_nans(&self) -> bool {
         self.x.is_nan() || self.y.is_nan() || self.z.is_nan()
     }
 
+    /// Returns a random `Vector3` in a sphere of radius 1.
     pub fn random_in_unit_sphere() -> Vector3 {
         let mut rng = rand::thread_rng();
         let mut p = Vector3::zero();
@@ -115,6 +120,7 @@ impl Vector3 {
         p
     }
 
+    /// Returns a random `Vector3` on a sphere of radius 1.
     pub fn random_on_unit_sphere() -> Vector3 {
         let mut rng = rand::thread_rng();
         let mut p = Vector3::zero();
@@ -129,6 +135,7 @@ impl Vector3 {
         p.normalized()
     }
 
+    /// Returns a random `Vector3` to a sphere with `radius` that is `distance_squared` away with.
     pub fn random_to_sphere(radius: f32, distance_squared: f32) -> Vector3 {
         use std::f32;
 
@@ -143,6 +150,7 @@ impl Vector3 {
         Vector3::new(x, y, z)
     }
 
+    /// Returns a random `Vector3` in a unit disk.
     pub fn random_in_unit_disk() -> Vector3 {
         let mut rng = rand::thread_rng();
         let mut p = Vector3::zero();
@@ -157,6 +165,7 @@ impl Vector3 {
         p
     }
 
+    /// Returns a `Vector3` pointing in a random direction.
     pub fn random_cosine_direction() -> Vector3 {
         use std::f32;
 
@@ -171,10 +180,12 @@ impl Vector3 {
         Vector3::new(x, y, z)
     }
 
+    /// Returns the value of `v` reflected across the normal `n`.
     pub fn reflect(v: Vector3, n: Vector3) -> Vector3 {
         v - n * 2.0 * Vector3::dot(v, n)
     }
 
+    /// Converts the `Vector3` to a `Vector4` by adding `w`.
     pub fn to_vector4(&self, w: f32) -> Vector4 {
         Vector4::new(self.x, self.y, self.z, w)
     }
