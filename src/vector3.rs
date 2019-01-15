@@ -2,7 +2,7 @@ extern crate rand;
 
 use std::ops::{Add, Sub, Mul, Div, Neg, Index, IndexMut};
 use self::rand::Rng;
-use vector4::Vector4;
+use super::Vector4;
 
 /// A 3 axis vector of `f32` values.
 #[derive(Debug, Copy, Clone)]

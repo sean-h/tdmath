@@ -1,3 +1,5 @@
+use super::Vector3;
+
 #[derive(Debug, Copy, Clone)]
 pub struct Vector4 {
     pub x: f32,
@@ -23,5 +25,9 @@ impl Vector4 {
             z: 0.0,
             w: 0.0,
         }
+    }
+
+    pub fn xyz(&self) -> Vector3 {
+        Vector3::new(self.x, self.y, self.z)
     }
 }
