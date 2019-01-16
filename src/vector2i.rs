@@ -1,5 +1,6 @@
 use vector3::Vector3;
 use std::cmp::{min, max};
+use std::ops::{Add, Sub, Mul, Div, Neg, Index, IndexMut};
 
 /// A 2 axis vector of `i32` values.
 #[derive(Debug, Copy, Clone)]
@@ -38,5 +39,166 @@ impl Vector2i {
 
         (Vector2i::new(min_x, min_y),
          Vector2i::new(max_x, max_y))
+    }
+}
+
+impl Add for Vector2i {
+    type Output = Vector2i;
+
+    fn add(self, other: Vector2i) -> Vector2i {
+        Vector2i { x: self.x + other.x,
+                   y: self.y + other.y }
+    }
+}
+
+impl Sub for Vector2i {
+    type Output = Vector2i;
+
+    fn sub(self, other: Vector2i) -> Vector2i {
+        Vector2i { x: self.x - other.x,
+                   y: self.y - other.y }
+    }
+}
+
+impl Mul<i32> for Vector2i {
+    type Output = Vector2i;
+
+    fn mul(self, other: i32) -> Vector2i {
+        Vector2i { x: self.x * other,
+                   y: self.y * other }
+    }
+}
+
+impl Mul<Vector2i> for i32 {
+    type Output = Vector2i;
+
+    fn mul(self, other: Vector2i) -> Vector2i {
+        Vector2i { x: self * other.x,
+                   y: self * other.y }
+    }
+}
+
+impl Mul<Vector2i> for Vector2i {
+    type Output = Vector2i;
+
+    fn mul(self, other: Vector2i) -> Vector2i {
+        Vector2i { x: self.x * other.x,
+                   y: self.y * other.y }
+    }
+}
+
+impl Div<i32> for Vector2i {
+    type Output = Vector2i;
+
+    fn div(self, other: i32) -> Vector2i {
+        Vector2i { x: self.x / other,
+                   y: self.y / other }
+    }
+}
+
+impl Neg for Vector2i {
+    type Output = Vector2i;
+
+    fn neg(self) -> Vector2i {
+        Vector2i { x: -self.x,
+                   y: -self.y }
+    }
+}
+
+impl Index<usize> for Vector2i {
+    type Output = i32;
+
+    fn index(&self, index: usize) -> &i32 {
+        match index {
+            0 => &self.x,
+            1 => &self.y,
+            _ => panic!("Invalid Vector2i index"),
+        }
+    }
+}
+
+impl IndexMut<usize> for Vector2i {
+    fn index_mut(&mut self, index: usize) -> &mut i32 {
+        match index {
+            0 => &mut self.x,
+            1 => &mut self.y,
+            _ => panic!("Invalid Vector2i index"),
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use vector2i::Vector2i;
+
+    #[test]
+    fn test_vector2i_add() {
+        let a = Vector2i::new(0, 5);
+        let b = Vector2i::new(-6, 4);
+        let c = a + b;
+        assert_eq!(c.x, -6);
+        assert_eq!(c.y, 9);
+    }
+
+    #[test]
+    fn test_vector2i_sub() {
+        let a = Vector2i::new(0, 5);
+        let b = Vector2i::new(-6, 4);
+        let c = a - b;
+        assert_eq!(c.x, 6);
+        assert_eq!(c.y, 1);
+    }
+
+    #[test]
+    fn test_vector2i_mul() {
+        let a = Vector2i::new(0, 5);
+        let b = 3;
+        let c = a * b;
+        assert_eq!(c.x, 0);
+        assert_eq!(c.y, 15);
+
+        let c = b * a;
+        assert_eq!(c.x, 0);
+        assert_eq!(c.y, 15);
+    }
+
+    #[test]
+    fn test_vector2i_mul_vector2i() {
+        let a = Vector2i::new(0, 5);
+        let b = Vector2i::new(3, 2);
+        let c = a * b;
+        assert_eq!(c.x, 0);
+        assert_eq!(c.y, 10);
+    }
+
+    #[test]
+    fn test_vector2i_div() {
+        let a = Vector2i::new(12, 5);
+        let b = 3;
+        let c = a / b;
+        assert_eq!(c.x, 4);
+        assert_eq!(c.y, 1);
+    }
+
+    #[test]
+    fn test_vector2i_neg() {
+        let a = Vector2i::new(12, 0);
+        let c = -a;
+        assert_eq!(c.x, -12);
+        assert_eq!(c.y, 0);
+    }
+
+    #[test]
+    fn test_vector2i_index() {
+        let a = Vector2i::new(12, 0);
+        assert_eq!(a[0], 12);
+        assert_eq!(a[1], 0);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_vector2i_index_panic() {
+        let a = Vector2i::new(12, 0);
+        assert_eq!(a[2], 0);
     }
 }
