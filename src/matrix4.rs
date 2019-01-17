@@ -6,7 +6,7 @@ use quaternion::Quaternion;
 /// A 4x4 matrix of `f32` values.
 #[derive(Debug, Copy, Clone)]
 pub struct Matrix4 {
-    data: [[f32; 4]; 4]
+    pub data: [[f32; 4]; 4]
 }
 
 impl Matrix4 {
