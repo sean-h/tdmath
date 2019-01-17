@@ -94,6 +94,14 @@ impl Matrix4 {
 
         m
     }
+
+    /// Returns the transpose of the matrix.
+    pub fn transpose(&self) -> Matrix4 {
+        Matrix4 {data: [[self[0][0], self[1][0], self[2][0], self[3][0]],
+                        [self[0][1], self[1][1], self[2][1], self[3][1]],
+                        [self[0][2], self[1][2], self[2][2], self[3][2]],
+                        [self[0][3], self[1][3], self[2][3], self[3][3]]]}
+    }
 }
 
 impl Index<usize> for Matrix4 {
@@ -192,5 +200,34 @@ mod tests {
         assert_eq!(mv.x, 0.0);
         assert_eq!(mv.y, 0.0);
         assert_eq!(mv.z, -2.0);
+    }
+
+    #[test]
+    fn test_matrix_transpose() {
+        let m = Matrix4 {data: [[0.0,   1.0,  2.0,  3.0],
+                                [4.0,   5.0,  6.0,  7.0],
+                                [8.0,   9.0, 10.0, 11.0],
+                                [12.0, 13.0, 14.0, 15.0]]};
+        let t = m.transpose();
+
+        assert_eq!(t[0][0], m[0][0]);
+        assert_eq!(t[0][1], m[1][0]);
+        assert_eq!(t[0][2], m[2][0]);
+        assert_eq!(t[0][3], m[3][0]);
+
+        assert_eq!(t[1][0], m[0][1]);
+        assert_eq!(t[1][1], m[1][1]);
+        assert_eq!(t[1][2], m[2][1]);
+        assert_eq!(t[1][3], m[3][1]);
+
+        assert_eq!(t[2][0], m[0][2]);
+        assert_eq!(t[2][1], m[1][2]);
+        assert_eq!(t[2][2], m[2][2]);
+        assert_eq!(t[2][3], m[3][2]);
+
+        assert_eq!(t[3][0], m[0][3]);
+        assert_eq!(t[3][1], m[1][3]);
+        assert_eq!(t[3][2], m[2][3]);
+        assert_eq!(t[3][3], m[3][3]);
     }
 }
