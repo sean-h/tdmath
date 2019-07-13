@@ -12,7 +12,7 @@ pub struct Vector2i {
 impl Vector2i {
     /// Returns a new `Vector2i`.
     pub fn new(x: i32, y: i32) -> Vector2i {
-        Vector2i { x: x, y: y }
+        Vector2i { x, y }
     }
 
     /// Returns the barycentric coordinates for `point` inside a triangle defined by `v0`, `v1`, `v2`.

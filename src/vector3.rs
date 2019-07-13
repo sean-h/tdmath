@@ -15,7 +15,7 @@ pub struct Vector3 {
 impl Vector3 {
     /// Returns a new `Vector3`.
     pub fn new(x: f32, y: f32, z: f32) -> Vector3 {
-        Vector3 { x: x, y: y, z: z }
+        Vector3 { x, y, z }
     }
 
     /// Returns a `Vector3` with a length of 0.
@@ -108,7 +108,7 @@ impl Vector3 {
     /// Returns a random `Vector3` in a sphere of radius 1.
     pub fn random_in_unit_sphere() -> Vector3 {
         let mut rng = rand::thread_rng();
-        let mut p = Vector3::zero();
+        let mut p;
         loop {
             p = Vector3::new(rng.gen::<f32>(), rng.gen::<f32>(), rng.gen::<f32>()) * 2.0 - Vector3::new(1.0, 1.0, 1.0);
 
@@ -123,7 +123,7 @@ impl Vector3 {
     /// Returns a random `Vector3` on a sphere of radius 1.
     pub fn random_on_unit_sphere() -> Vector3 {
         let mut rng = rand::thread_rng();
-        let mut p = Vector3::zero();
+        let mut p;
         loop {
             p = Vector3::new(rng.gen::<f32>(), rng.gen::<f32>(), rng.gen::<f32>()) * 2.0 - Vector3::new(1.0, 1.0, 1.0);
 
@@ -153,7 +153,7 @@ impl Vector3 {
     /// Returns a random `Vector3` in a unit disk.
     pub fn random_in_unit_disk() -> Vector3 {
         let mut rng = rand::thread_rng();
-        let mut p = Vector3::zero();
+        let mut p;
         loop {
             p = Vector3::new(rng.gen::<f32>(), rng.gen::<f32>(), 0.0) * 2.0 - Vector3::new(1.0, 1.0, 0.0);
 

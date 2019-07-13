@@ -84,7 +84,7 @@ impl Matrix4 {
     /// Returns a perspective matrix for fov degrees and aspect ratio (width / height).
     pub fn perpective(fov: f32, aspect: f32, near: f32, far: f32) -> Matrix4 {
         let mut m = Matrix4::zero();
-        let s = (fov / 2.0 * 3.14159 / 180.0).tan();
+        let s = (fov / 2.0 * std::f32::consts::PI / 180.0).tan();
 
         m[0][0] = 1.0 / (s * aspect);
         m[1][1] = 1.0 / s;
@@ -131,7 +131,8 @@ impl Mul<Matrix4> for Matrix4 {
                           self[i][3] * other[3][j];
             }
         }
-        return r;
+        
+        r
     }
 }
 
